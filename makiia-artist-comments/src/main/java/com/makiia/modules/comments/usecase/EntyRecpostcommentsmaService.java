@@ -1,13 +1,13 @@
-package com.makiia.modules.filter.usecase;
+package com.makiia.modules.comments.usecase;
 import com.makiia.crosscutting.domain.model.EntyDeleteDto;
-import com.makiia.crosscutting.domain.model.EntyRecmaesusuarimcDto;
-import com.makiia.crosscutting.domain.model.EntyRecmaesusuarimcResponse;
+import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaDto;
+import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaResponse;
 import com.makiia.crosscutting.exceptions.ExceptionBuilder;
 import com.makiia.crosscutting.exceptions.Main.EBusinessException;
 import com.makiia.crosscutting.messages.SearchMessages;
 import com.makiia.modules.bus.services.UseCase;
 import com.makiia.modules.bus.services.UsecaseServices;
-import com.makiia.modules.filter.dataproviders.jpa.JpaEntyRecmaesusuarimcDataProviders;
+import com.makiia.modules.comments.dataproviders.jpa.JpaEntyRecpostcommentsmaDataProviders;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -16,18 +16,18 @@ import javax.persistence.PersistenceException;
 import java.util.List;
 @Log4j2
 @UseCase
-public class EntyRecmaesusuarimcService extends UsecaseServices<EntyRecmaesusuarimcDto, JpaEntyRecmaesusuarimcDataProviders>
+public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcommentsmaDto, JpaEntyRecpostcommentsmaDataProviders>
 {
     @Autowired
-    private JpaEntyRecmaesusuarimcDataProviders jpaDataProviders;
+    private JpaEntyRecpostcommentsmaDataProviders jpaDataProviders;
     @PostConstruct
     public void init(){
         this.ijpaDataProvider = jpaDataProviders;
     }
 
-    public EntyRecmaesusuarimcResponse saveBefore(EntyRecmaesusuarimcResponse dto) throws EBusinessException {
+    public EntyRecpostcommentsmaResponse saveBefore(EntyRecpostcommentsmaResponse dto) throws EBusinessException {
         try{
-            List<EntyRecmaesusuarimcDto>  dtoAux = this.ijpaDataProvider.save(dto.getRspData());
+            List<EntyRecpostcommentsmaDto>  dtoAux = this.ijpaDataProvider.save(dto.getRspData());
             dtoAux = this.ijpaDataProvider.save(dtoAux);
             dto.setRspData(dtoAux);
             return dto;
@@ -40,12 +40,12 @@ public class EntyRecmaesusuarimcService extends UsecaseServices<EntyRecmaesusuar
         }
     }
 
-    public EntyRecmaesusuarimcResponse updateAll(EntyRecmaesusuarimcResponse dto) throws EBusinessException {
+    public EntyRecpostcommentsmaResponse updateAll(EntyRecpostcommentsmaResponse dto) throws EBusinessException {
         try {
-            List<EntyRecmaesusuarimcDto> dtoAux = dto.getRspData();
+            List<EntyRecpostcommentsmaDto> dtoAux = dto.getRspData();
 
-            for (EntyRecmaesusuarimcDto dtox : dtoAux){
-                dtox = this.ijpaDataProvider.update(dtox.getRecUnikeyRemc(),dtox);
+            for (EntyRecpostcommentsmaDto dtox : dtoAux){
+                dtox = this.ijpaDataProvider.update(dtox.getRecIdeunikeyRcom(),dtox);
             }
             dto.setRspData(dtoAux);
             return dto;

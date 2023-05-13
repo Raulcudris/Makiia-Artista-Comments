@@ -1,5 +1,4 @@
 package com.makiia.infrastructure.main;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -13,10 +12,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 		"com.makiia.crosscutting.persistence.repository"})
 @EntityScan(basePackages = "com.makiia.crosscutting.persistence.entity")
 @EnableWebMvc
-public class MakiiaArtistFilterApplication {
+public class MakiiaArtistCommentsApplication {
 
 	public static void main(final String[] args) {
-		SpringApplication.run(MakiiaArtistFilterApplication.class, args);
+		SpringApplication.run(MakiiaArtistCommentsApplication.class, args);
 	}
 
 }

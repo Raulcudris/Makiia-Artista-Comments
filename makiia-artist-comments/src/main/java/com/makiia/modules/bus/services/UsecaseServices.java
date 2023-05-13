@@ -1,7 +1,7 @@
 package com.makiia.modules.bus.services;
 import com.makiia.crosscutting.domain.enums.ProcessName;
 import com.makiia.crosscutting.domain.enums.Status;
-import com.makiia.crosscutting.domain.model.EntyRecmaesusuarimcResponse;
+import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaResponse;
 import com.makiia.crosscutting.domain.model.traceability.TransactionFile;
 import com.makiia.crosscutting.exceptions.ExceptionBuilder;
 import com.makiia.crosscutting.exceptions.Main.EBusinessException;
@@ -34,7 +34,7 @@ public class UsecaseServices <T, K> {
      * @throws EBusinessException  excepcion
      * @throws MicroEventException excepcion
      */
-    public EntyRecmaesusuarimcResponse getAll() throws EBusinessException, MicroEventException {
+    public EntyRecpostcommentsmaResponse getAll() throws EBusinessException, MicroEventException {
         String transactionalId = UUID.randomUUID().toString();
 
         try {
@@ -64,7 +64,7 @@ public class UsecaseServices <T, K> {
      * @throws EBusinessException  excepcion
      * @throws MicroEventException excepcion
      */
-    public EntyRecmaesusuarimcResponse getAll(int currentPage , int pageSize, int parameter , String filter) throws EBusinessException, MicroEventException {
+    public EntyRecpostcommentsmaResponse getAll(int currentPage , int pageSize, int parameter , String filter) throws EBusinessException, MicroEventException {
         String transactionalId = UUID.randomUUID().toString();
 
         try {

@@ -9,13 +9,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EntyRecmaesusuarimcResponse {
+public class EntyRecpostcommentsmaResponse {
     private  String rspValue ="OK";
     private  String rspMessage ="OK";
     private  String rspParentKey = "NA";
     private  String rspAppKey = "NA";
     private  PaginationResponse rspPagination = new PaginationResponse();
-    private  List<EntyRecmaesusuarimcDto> rspData;
+    private  List<EntyRecpostcommentsmaDto> rspData;
 
 }
 
