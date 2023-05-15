@@ -44,12 +44,14 @@ public class EntyRecpostcommentsmaWebApi {
         return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
+
     @PostMapping("create")
     @ApiOperation(httpMethod = ApiConstants.POST_HTTP, value = ApiConstants.POST_DESC, notes = "")
     public ResponseEntity<EntyRecpostcommentsmaResponse> create(@RequestBody EntyRecpostcommentsmaResponse dto)
             throws EBusinessException, MicroEventException {
         return new ResponseEntity<>(service.saveBefore(dto), HttpStatus.CREATED);
     }
+
 
     @PutMapping("update")
     @ApiOperation(httpMethod = ApiConstants.PUT_HTTP, value = ApiConstants.PUT_DESC, notes = "")

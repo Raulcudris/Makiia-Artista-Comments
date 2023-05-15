@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -61,7 +63,7 @@ public class EntyRecpostcommentsma implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "rec_messagorig_rcom")
-    private Double  recMessagorigRcom;
+    private String  recMessagorigRcom;
 
     @Basic(optional = false)
     @Column(name = "rec_messagtype_rcom")
@@ -77,8 +79,8 @@ public class EntyRecpostcommentsma implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "rec_messagdate_rcom")
-    @JsonFormat(pattern="yyyy/MM/dd")
-    private Date  recMessagdateRcom;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyyMMddHHmm")
+    private LocalDateTime recMessagdateRcom;
 
     @Basic(optional = false)
     @Column(name = "rec_messagtime_rcom")
@@ -86,8 +88,8 @@ public class EntyRecpostcommentsma implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "rec_editmddate_rcom")
-    @JsonFormat(pattern="yyyy/MM/dd")
-    private Date  recEditmddateRcom;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate recEditmddateRcom;
 
     @Basic(optional = false)
     @Column(name = "rec_editmdtime_rcom")
@@ -95,8 +97,8 @@ public class EntyRecpostcommentsma implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "rec_editdedate_rcom")
-    @JsonFormat(pattern="yyyy/MM/dd")
-    private Date  recEditdedateRcom;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate  recEditdedateRcom;
 
     @Basic(optional = false)
     @Column(name = "rec_editdetime_rcom")
@@ -120,8 +122,8 @@ public class EntyRecpostcommentsma implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "rec_checkmdate_rcom")
-    @JsonFormat(pattern="yyyy/MM/dd")
-    private Date  recCheckmdateRcom;
+    @JsonFormat(pattern="yyyyMMdd")
+    private LocalDate  recCheckmdateRcom;
 
     @Basic(optional = false)
     @Column(name = "rec_checkmtime_rcom")
