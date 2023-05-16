@@ -26,20 +26,20 @@ public class EntyRecpostcommentsmaDto {
     private String  recMessagtypeRcom;
     private String  recMessagtconRcom;
     private String  recMessagbodyRcom;
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyyMMddHHmm")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDateTime recMessagdateRcom;
     private Double  recMessagtimeRcom;
-    @JsonFormat(pattern="yyyyMMdd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate recEditmddateRcom;
     private Double  recEditmdtimeRcom;
-    @JsonFormat(pattern="yyyyMMdd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate  recEditdedateRcom;
     private Double  recEditdetimeRcom;
     private Integer recClicpositiRcom;
     private Integer recClicnegatvRcom;
     private Integer recClicklegalRcom;
     private String  recCheckmarckRcom;
-    @JsonFormat(pattern="yyyyMMdd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate    recCheckmdateRcom;
     private Double  recCheckmtimeRcom;
     private Double  recOrdviewkeyRcom;

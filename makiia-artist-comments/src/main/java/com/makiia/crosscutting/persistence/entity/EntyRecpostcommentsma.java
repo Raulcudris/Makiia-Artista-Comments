@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -79,7 +78,7 @@ public class EntyRecpostcommentsma implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "rec_messagdate_rcom")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyyMMddHHmm")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDateTime recMessagdateRcom;
 
     @Basic(optional = false)
@@ -122,7 +121,7 @@ public class EntyRecpostcommentsma implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "rec_checkmdate_rcom")
-    @JsonFormat(pattern="yyyyMMdd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate  recCheckmdateRcom;
 
     @Basic(optional = false)
