@@ -1,9 +1,13 @@
 package com.makiia.crosscutting.domain.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import java.sql.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Data
 @Builder
@@ -27,7 +31,7 @@ public class EntyRecpostcommentsmaDto {
     private String  recMessagtconRcom;
     private String  recMessagbodyRcom;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDateTime recMessagdateRcom;
+    private LocalDate recMessagdateRcom;
     private Double  recMessagtimeRcom;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate recEditmddateRcom;
@@ -40,9 +44,9 @@ public class EntyRecpostcommentsmaDto {
     private Integer recClicklegalRcom;
     private String  recCheckmarckRcom;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDate    recCheckmdateRcom;
+    private LocalDate  recCheckmdateRcom;
     private Double  recCheckmtimeRcom;
-    private Double  recOrdviewkeyRcom;
+    private Long  recOrdviewkeyRcom;
     private String  recRegisstateRcom;
 
 }

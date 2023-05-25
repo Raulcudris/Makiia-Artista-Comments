@@ -19,7 +19,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import javax.persistence.PersistenceException;
 import java.util.ArrayList;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -133,6 +132,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
         }
     }
 
+
     @Override
     public List<EntyRecpostcommentsmaDto> save(List<EntyRecpostcommentsmaDto> dtos) throws EBusinessException {
         try {
@@ -155,6 +155,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
         }
     }
 
+
     @Override
     public EntyRecpostcommentsmaDto update(Integer id, EntyRecpostcommentsmaDto dto) throws EBusinessException {
         try {
@@ -176,7 +177,6 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                             ? entity.getRecProfiltypeRcom()
                             :old.getRecProfiltypeRcom());
 
-
             old.setRecProfilpkeyRcom(
                     Objects.nonNull(dto.getRecProfilpkeyRcom())&& !entity.getRecProfilpkeyRcom().isEmpty()
                             ? entity.getRecProfilpkeyRcom()
@@ -192,10 +192,15 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                             ? entity.getRecIdentifkeyReus()
                             :old.getRecIdentifkeyReus());
 
+            old.setRecIdentifkeyReus(
+                    Objects.nonNull(dto.getRecIdentifkeyReus())&& !entity.getRecIdentifkeyReus().isEmpty()
+                            ? entity.getRecIdentifkeyReus()
+                            :old.getRecIdentifkeyReus());
+
             old.setApjIdentifkeyAphp(
                     Objects.nonNull(dto.getApjIdentifkeyAphp())&& !entity.getApjIdentifkeyAphp().isEmpty()
-                            ? entity.getApjIdentifkeyAphp()
-                            :old.getApjIdentifkeyAphp());
+                    ? entity.getApjIdentifkeyAphp()
+                    :old.getApjIdentifkeyAphp());
 
             old.setRecTreemlevelRcom(
                     Objects.nonNull(dto.getRecTreemlevelRcom())&& !entity.getRecTreemlevelRcom().isEmpty()
@@ -213,12 +218,12 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                             :old.getRecTreemcountRcom());
 
             old.setRecMessagorigRcom(
-                    Objects.nonNull(dto.getRecMessagorigRcom())&& !entity.getRecMessagorigRcom().equals(0)
+                    Objects.nonNull(dto.getRecMessagorigRcom())&& !entity.getRecMessagorigRcom().isEmpty()
                             ? entity.getRecMessagorigRcom()
                             :old.getRecMessagorigRcom());
 
             old.setRecMessagtypeRcom(
-                    Objects.nonNull(dto.getRecMessagtypeRcom())&& !entity.getRecMessagtypeRcom().equals(0)
+                    Objects.nonNull(dto.getRecMessagtypeRcom())&& !entity.getRecMessagtypeRcom().isEmpty()
                             ? entity.getRecMessagtypeRcom()
                             :old.getRecMessagtypeRcom());
 
@@ -228,7 +233,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                             :old.getRecMessagtconRcom());
 
             old.setRecMessagbodyRcom(
-                    Objects.nonNull(dto.getRecMessagbodyRcom())&& !entity.getRecMessagbodyRcom().equals(0)
+                    Objects.nonNull(dto.getRecMessagbodyRcom())&& !entity.getRecMessagbodyRcom().isEmpty()
                             ? entity.getRecMessagbodyRcom()
                             :old.getRecMessagbodyRcom());
 
@@ -278,7 +283,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                             :old.getRecClicklegalRcom());
 
             old.setRecCheckmarckRcom(
-                    Objects.nonNull(dto.getRecCheckmarckRcom())&& !entity.getRecCheckmarckRcom().equals(0)
+                    Objects.nonNull(dto.getRecCheckmarckRcom())&& !entity.getRecCheckmarckRcom().isEmpty()
                             ? entity.getRecCheckmarckRcom()
                             :old.getRecCheckmarckRcom());
 
@@ -286,7 +291,6 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                     Objects.nonNull(dto.getRecCheckmdateRcom())&& !entity.getRecCheckmdateRcom().equals(0)
                             ? entity.getRecCheckmdateRcom()
                             :old.getRecCheckmdateRcom());
-
 
             old.setRecCheckmtimeRcom(
                     Objects.nonNull(dto.getRecCheckmtimeRcom())&& !entity.getRecCheckmtimeRcom().equals(0)
@@ -299,10 +303,9 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                             :old.getRecOrdviewkeyRcom());
 
             old.setRecRegisstateRcom(
-                    Objects.nonNull(dto.getRecRegisstateRcom())&& !entity.getRecRegisstateRcom().equals(0)
+                    Objects.nonNull(dto.getRecRegisstateRcom())&& !entity.getRecRegisstateRcom().isEmpty()
                             ? entity.getRecRegisstateRcom()
                             :old.getRecRegisstateRcom());
-
 
             return saveResponseTranslate.translate(repository.save(old));
         } catch (PersistenceException | DataAccessException e) {

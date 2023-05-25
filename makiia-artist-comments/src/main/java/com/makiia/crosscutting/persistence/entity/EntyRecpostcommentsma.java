@@ -4,10 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -79,7 +83,7 @@ public class EntyRecpostcommentsma implements Serializable {
     @Basic(optional = false)
     @Column(name = "rec_messagdate_rcom")
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDateTime recMessagdateRcom;
+    private LocalDate recMessagdateRcom;
 
     @Basic(optional = false)
     @Column(name = "rec_messagtime_rcom")
@@ -130,7 +134,7 @@ public class EntyRecpostcommentsma implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "rec_ordviewkey_rcom")
-    private Double  recOrdviewkeyRcom;
+    private Long  recOrdviewkeyRcom;
 
     @Basic(optional = false)
     @Column(name = "rec_regisstate_rcom")

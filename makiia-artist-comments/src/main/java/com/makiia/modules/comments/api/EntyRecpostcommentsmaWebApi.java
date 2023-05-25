@@ -18,7 +18,7 @@ import java.util.List;
 
 @Log4j2
 @RestController
-@RequestMapping(value = "/Comments", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/comments", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class EntyRecpostcommentsmaWebApi {
     @Autowired
     private EntyRecpostcommentsmaService service;
@@ -44,7 +44,6 @@ public class EntyRecpostcommentsmaWebApi {
         return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
 
-
     @PostMapping("create")
     @ApiOperation(httpMethod = ApiConstants.POST_HTTP, value = ApiConstants.POST_DESC, notes = "")
     public ResponseEntity<EntyRecpostcommentsmaResponse> create(@RequestBody EntyRecpostcommentsmaResponse dto)
@@ -52,13 +51,20 @@ public class EntyRecpostcommentsmaWebApi {
         return new ResponseEntity<>(service.saveBefore(dto), HttpStatus.CREATED);
     }
 
-
     @PutMapping("update")
     @ApiOperation(httpMethod = ApiConstants.PUT_HTTP, value = ApiConstants.PUT_DESC, notes = "")
     public ResponseEntity<EntyRecpostcommentsmaResponse> update(@RequestBody EntyRecpostcommentsmaResponse dto)
             throws EBusinessException, MicroEventException {
-        return new ResponseEntity<>(service.updateAll(dto), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.updateAll(dto), HttpStatus.OK);
     }
+
+
+    @PatchMapping("changestatus")
+    @ApiOperation(httpMethod = ApiConstants.PATCH_HTTP, value = ApiConstants.PATCH_DESC, notes = "")
+    public String changestatus(@RequestBody List<EntyDeleteDto> dto) throws EBusinessException, MicroEventException {
+        return service.changestatusAll(dto);
+    }
+
     @DeleteMapping("delete")
     @ApiOperation(httpMethod = ApiConstants.DELETE_HTTP, value = ApiConstants.DELETE_DESC, notes = "")
     public String delete(@RequestBody List<EntyDeleteDto> dto) throws EBusinessException, MicroEventException {
