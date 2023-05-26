@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +46,8 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
     public EntyRecpostcommentsmaResponse saveBefore(EntyRecpostcommentsmaResponse dto) throws EBusinessException {
         try {
             List<EntyRecpostcommentsmaDto> dtoAux = this.ijpaDataProvider.save(dto.getRspData());
-            localDateNow = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            //localDateNow = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+          localDateNow = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             dateNowWhitTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
             timeNowHourMin = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH.mm"));
             localTimeNow = Double.valueOf(timeNowHourMin);

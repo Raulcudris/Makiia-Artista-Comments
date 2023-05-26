@@ -1,12 +1,8 @@
 package com.makiia.crosscutting.domain.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.annotation.Nullable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Data

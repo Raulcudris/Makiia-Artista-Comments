@@ -1,5 +1,4 @@
 package com.makiia.crosscutting.domain.adapter;
-
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;

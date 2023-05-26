@@ -1,12 +1,9 @@
 package com.makiia.crosscutting.utils;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.makiia.crosscutting.domain.adapter.HibernateProxyTypeAdapter;
 import lombok.experimental.UtilityClass;
+
 
 @UtilityClass
 public class GsonUtil {
@@ -40,6 +37,7 @@ public class GsonUtil {
         }
 
         return gsonBuilder.create();
+
     }
 
 }

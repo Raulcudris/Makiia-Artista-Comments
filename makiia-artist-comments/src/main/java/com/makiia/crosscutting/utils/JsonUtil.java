@@ -1,12 +1,8 @@
 package com.makiia.crosscutting.utils;
-
+import com.google.gson.*;
 import com.makiia.crosscutting.domain.constants.Constants;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-
 import lombok.experimental.UtilityClass;
+
 @UtilityClass
 public final class JsonUtil {
     private static final Gson GSON_IDENTITY = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
