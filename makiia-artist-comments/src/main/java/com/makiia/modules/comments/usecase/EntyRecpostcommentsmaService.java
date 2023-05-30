@@ -5,8 +5,6 @@ import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaResponse;
 import com.makiia.crosscutting.exceptions.ExceptionBuilder;
 import com.makiia.crosscutting.exceptions.Main.EBusinessException;
 import com.makiia.crosscutting.messages.SearchMessages;
-import com.makiia.crosscutting.persistence.entity.EntyRecpostcommentsma;
-import com.makiia.crosscutting.persistence.repository.EntyRecpostcommentsmaRepository;
 import com.makiia.modules.bus.services.UseCase;
 import com.makiia.modules.bus.services.UsecaseServices;
 import com.makiia.modules.comments.dataproviders.jpa.JpaEntyRecpostcommentsmaDataProviders;
@@ -15,15 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import javax.annotation.PostConstruct;
 import javax.persistence.PersistenceException;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Log4j2
 @UseCase
@@ -46,8 +39,7 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
     public EntyRecpostcommentsmaResponse saveBefore(EntyRecpostcommentsmaResponse dto) throws EBusinessException {
         try {
             List<EntyRecpostcommentsmaDto> dtoAux = this.ijpaDataProvider.save(dto.getRspData());
-            //localDateNow = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-          localDateNow = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            localDateNow = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             dateNowWhitTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
             timeNowHourMin = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH.mm"));
             localTimeNow = Double.valueOf(timeNowHourMin);
@@ -132,10 +124,6 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
                     .buildBusinessException();
         }
     }
-
-
-
-
     public String deleteAll(List<EntyDeleteDto> dto) throws EBusinessException {
         try {
 

@@ -7,7 +7,6 @@ logging:
   level:
      org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
 
-
 spring:
   jpa:
     properties:
@@ -22,7 +21,7 @@ spring:
       jdbc-url: "jdbc:mysql://localhost/dbmysqlartistas"
       jmx-enabled: true
       password: root
-      username: root
+      username: admin
 
   management:
     health:
