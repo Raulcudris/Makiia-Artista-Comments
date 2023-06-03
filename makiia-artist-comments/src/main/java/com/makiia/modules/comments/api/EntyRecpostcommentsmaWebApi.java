@@ -1,6 +1,7 @@
 package com.makiia.modules.comments.api;
 import com.makiia.crosscutting.domain.constants.ApiConstants;
 import com.makiia.crosscutting.domain.constants.Constants;
+import com.makiia.crosscutting.domain.model.EntyCommentUtiliDto;
 import com.makiia.crosscutting.domain.model.EntyDeleteDto;
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaDto;
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaResponse;
@@ -8,7 +9,6 @@ import com.makiia.crosscutting.exceptions.Main.EBusinessException;
 import com.makiia.crosscutting.exceptions.MicroEventException;
 import com.makiia.modules.comments.usecase.EntyRecpostcommentsmaService;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@Log4j2
 @RestController
 @RequestMapping(value = "/comments", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class EntyRecpostcommentsmaWebApi {
@@ -61,7 +60,7 @@ public class EntyRecpostcommentsmaWebApi {
 
     @PatchMapping("changestatus")
     @ApiOperation(httpMethod = ApiConstants.PATCH_HTTP, value = ApiConstants.PATCH_DESC, notes = "")
-    public String changestatus(@RequestBody List<EntyDeleteDto> dto) throws EBusinessException, MicroEventException {
+    public String changestatus(@RequestBody List<EntyCommentUtiliDto> dto) throws EBusinessException, MicroEventException {
         return service.changestatusAll(dto);
     }
 

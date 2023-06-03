@@ -1,4 +1,5 @@
 package com.makiia.modules.comments.usecase;
+import com.makiia.crosscutting.domain.model.EntyCommentUtiliDto;
 import com.makiia.crosscutting.domain.model.EntyDeleteDto;
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaDto;
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaResponse;
@@ -8,7 +9,6 @@ import com.makiia.crosscutting.messages.SearchMessages;
 import com.makiia.modules.bus.services.UseCase;
 import com.makiia.modules.bus.services.UsecaseServices;
 import com.makiia.modules.comments.dataproviders.jpa.JpaEntyRecpostcommentsmaDataProviders;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import javax.annotation.PostConstruct;
@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@Log4j2
 @UseCase
 public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcommentsmaDto, JpaEntyRecpostcommentsmaDataProviders>
 {
@@ -100,14 +99,14 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
     }
 
 
-    public String changestatusAll(List<EntyDeleteDto> dto) throws EBusinessException {
+    public String changestatusAll(List<EntyCommentUtiliDto> dto) throws EBusinessException {
         try {
             localDateNow = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             timeNowHourMin = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH.mms"));
             localTimeNow = Double.valueOf(timeNowHourMin);
             EntyRecpostcommentsmaDto rspto = new EntyRecpostcommentsmaDto();
 
-            for (EntyDeleteDto dtox : dto) {
+            for (EntyCommentUtiliDto dtox : dto) {
                 rspto = this.ijpaDataProvider.get(dtox.getRecPKey());
                 rspto.setRecEditdedateRcom(localDateNow);
                 rspto.setRecEditdetimeRcom(localTimeNow);

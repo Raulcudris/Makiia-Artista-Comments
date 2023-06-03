@@ -10,7 +10,6 @@ import com.makiia.crosscutting.patterns.Translator;
 import com.makiia.crosscutting.persistence.entity.EntyRecpostcommentsma;
 import com.makiia.crosscutting.persistence.repository.EntyRecpostcommentsmaRepository;
 import com.makiia.modules.comments.dataproviders.IjpaEntyRecpostcommentsmaDataProviders;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
@@ -23,7 +22,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Log4j2
 @DataProvider
 public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcommentsmaDataProviders {
 
