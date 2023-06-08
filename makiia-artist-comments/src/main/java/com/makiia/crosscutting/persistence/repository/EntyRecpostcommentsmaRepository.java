@@ -1,11 +1,12 @@
 package com.makiia.crosscutting.persistence.repository;
-import com.makiia.crosscutting.persistence.entity.EntyRecpostcommentsma;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-@Repository
+
+import com.makiia.crosscutting.persistence.entity.EntyRecpostcommentsma;
+
+
 public interface EntyRecpostcommentsmaRepository extends JpaRepository<EntyRecpostcommentsma,Integer>
 {
         String FILTER_USUARIO_RECUNIKEYREMC_QUERY = "select c from EntyRecpostcommentsma c  where c.recIdeunikeyRcom  = ?1  and c.recRegisstateRcom = 1 order by c.recOrdviewkeyRcom DESC";

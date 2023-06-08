@@ -1,4 +1,15 @@
 package com.makiia.modules.comments.usecase;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.persistence.PersistenceException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+
 import com.makiia.crosscutting.domain.model.EntyCommentUtiliDto;
 import com.makiia.crosscutting.domain.model.EntyDeleteDto;
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaDto;
@@ -9,14 +20,6 @@ import com.makiia.crosscutting.messages.SearchMessages;
 import com.makiia.modules.bus.services.UseCase;
 import com.makiia.modules.bus.services.UsecaseServices;
 import com.makiia.modules.comments.dataproviders.jpa.JpaEntyRecpostcommentsmaDataProviders;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import javax.annotation.PostConstruct;
-import javax.persistence.PersistenceException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @UseCase
 public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcommentsmaDto, JpaEntyRecpostcommentsmaDataProviders>
@@ -27,6 +30,7 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
     public void init(){
         this.ijpaDataProvider = jpaDataProviders;
     }
+    private String localYear;
     public LocalDate localDateNow;
     public LocalDate localDateDefault;
     private Double localTimeDefault;
@@ -34,18 +38,23 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
     private String dateNowWhitTime;
     private String timeNowHourMin;
     private Long ordeView;
+    private int year;
 
     public EntyRecpostcommentsmaResponse saveBefore(EntyRecpostcommentsmaResponse dto) throws EBusinessException {
         try {
             List<EntyRecpostcommentsmaDto> dtoAux = this.ijpaDataProvider.save(dto.getRspData());
+            localYear = LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));
             localDateNow = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             dateNowWhitTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
             timeNowHourMin = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH.mm"));
             localTimeNow = Double.valueOf(timeNowHourMin);
             localDateDefault = LocalDate.parse(LocalDate.of(0001,01,01).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            localTimeDefault = 00.00;
+            localTimeDefault = 0.0;
             ordeView = Long.valueOf(dateNowWhitTime);
+            year = Integer.parseInt(localYear);
             for(EntyRecpostcommentsmaDto dtox : dtoAux){
+                dtox.setRecIdentifkeyRcom(year+""+dtox.getRecIdeunikeyRcom());
+                dtox.setApjIdentifkeyAphp(dateNowWhitTime);
                 dtox.setRecMessagdateRcom(localDateNow);
                 dtox.setRecMessagtimeRcom(localTimeNow );
                 dtox.setRecEditmddateRcom(localDateNow);
@@ -60,6 +69,10 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
             }
             dtoAux = this.ijpaDataProvider.save(dtoAux);
             dto.setRspData(dtoAux);
+            dto.setRspValue("OK");
+            dto.setRspMessage("OK");
+            dto.setRspParentKey("NA");
+            dto.setRspAppKey("NA");
             return dto;
 
         }catch (PersistenceException | DataAccessException e){
@@ -78,7 +91,7 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
             timeNowHourMin = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH.mm"));
             localTimeNow = Double.valueOf(timeNowHourMin);
             localDateDefault = LocalDate.parse(LocalDate.of(0001,01,01).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            localTimeDefault = 00.00;
+            localTimeDefault = 0.0;
             for (EntyRecpostcommentsmaDto dtox : dtoAux){
                 dtox.setRecEditmddateRcom(localDateNow);
                 dtox.setRecEditmdtimeRcom(localTimeNow);
@@ -86,7 +99,7 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
                 dtox.setRecEditdetimeRcom(localTimeDefault);
                 dtox = this.ijpaDataProvider.update(dtox.getRecIdeunikeyRcom(),dtox);
             }
-            dto.setRspData(dtoAux);
+            dto.setRspData(dtoAux);           
             return dto;
 
         } catch (PersistenceException | DataAccessException e) {
