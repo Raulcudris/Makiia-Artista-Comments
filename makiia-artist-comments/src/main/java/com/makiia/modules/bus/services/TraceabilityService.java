@@ -1,39 +1,45 @@
 package com.makiia.modules.bus.services;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
+
+import org.springframework.jms.JmsException;
+import org.springframework.stereotype.Component;
+
 import com.makiia.crosscutting.domain.model.traceability.Traceability;
 import com.makiia.crosscutting.domain.model.traceability.TraceabilityEvent;
 import com.makiia.crosscutting.domain.model.traceability.TransactionFile;
 import com.makiia.crosscutting.exceptions.MicroEventException;
 import com.makiia.crosscutting.utils.GsonUtil;
+
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.jms.JmsException;
-import org.springframework.stereotype.Component;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@Builder
 public class TraceabilityService {
-
+    @Builder.Default
     private static final String SENDER_NIT = "SENDER_NIT";
-
+    @Builder.Default
     private static final String RECEIVER_NIT = "RECEIVER_NIT";
-
+    @Builder.Default
     private static final String DOCUMENT_TYPE = "DOCUMENT_TYPE";
-
+    @Builder.Default
     private static final String TRANSACTION_ID = "transactionId";
-
+    @Builder.Default
     private static final String COMPONENT = "ApprovalServices";
-
+    @Builder.Default
     private static final String SERVICE = "RADIAN";
-
+    @Builder.Default
     private static final Locale LOCALE = new Locale("es", "CO");
-
-
-
 
     public void createTraceabilityEventDocument(
             final String transactionId,

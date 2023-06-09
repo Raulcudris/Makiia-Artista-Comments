@@ -54,7 +54,6 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
             year = Integer.parseInt(localYear);
             for(EntyRecpostcommentsmaDto dtox : dtoAux){
                 dtox.setRecIdentifkeyRcom(year+""+dtox.getRecIdeunikeyRcom());
-                dtox.setApjIdentifkeyAphp(dateNowWhitTime);
                 dtox.setRecMessagdateRcom(localDateNow);
                 dtox.setRecMessagtimeRcom(localTimeNow );
                 dtox.setRecEditmddateRcom(localDateNow);

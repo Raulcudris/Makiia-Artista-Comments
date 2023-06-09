@@ -1,6 +1,21 @@
 package com.makiia.modules.comments.dataproviders.jpa;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import javax.persistence.PersistenceException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaDto;
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaResponse;
+import com.makiia.crosscutting.domain.model.EntyUserCommentDto;
 import com.makiia.crosscutting.domain.model.PaginationResponse;
 import com.makiia.crosscutting.exceptions.DataProvider;
 import com.makiia.crosscutting.exceptions.ExceptionBuilder;
@@ -10,17 +25,6 @@ import com.makiia.crosscutting.patterns.Translator;
 import com.makiia.crosscutting.persistence.entity.EntyRecpostcommentsma;
 import com.makiia.crosscutting.persistence.repository.EntyRecpostcommentsmaRepository;
 import com.makiia.modules.comments.dataproviders.IjpaEntyRecpostcommentsmaDataProviders;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import javax.persistence.PersistenceException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @DataProvider
 public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcommentsmaDataProviders {
@@ -37,25 +41,28 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
     @Override
     public EntyRecpostcommentsmaResponse getAll() throws EBusinessException {
         try {
-            List<EntyRecpostcommentsma> responses = (List<EntyRecpostcommentsma>) repository.findAll();
+            List<EntyRecpostcommentsma> responsesComments = (List<EntyRecpostcommentsma>) repository.findAll();
+        
             int currentPage=0;
-            int totalPageSize=responses.size();
+            int totalPageSize=responsesComments.size();
             Pageable pageable = PageRequest.of(currentPage, totalPageSize);
             //Pageable paginacion
-            Page<EntyRecpostcommentsma> ResponsePage = null;
-            ResponsePage = repository.findAll(pageable);
-
-            List<EntyRecpostcommentsma> ListPage = ResponsePage.getContent();
-            List<EntyRecpostcommentsmaDto> content  = ListPage.stream().map(p ->mapToDto(p)).collect(Collectors.toList());
-
+            Page<EntyRecpostcommentsma> responsePage = null;
+            EntyUserCommentDto responseUserComment = null;
+            responsePage = repository.findAll(pageable);
+                
+            List<EntyRecpostcommentsma> ListPage = responsePage.getContent();            
+            List<EntyRecpostcommentsmaDto> content  = ListPage.stream().map(p ->mapToDto(p)).collect(Collectors.toList());        
             EntyRecpostcommentsmaResponse response = new EntyRecpostcommentsmaResponse();
+            
+      
             response.setRspMessage(response.getRspMessage());
             response.setRspValue(response.getRspValue());
 
             currentPage = currentPage + 1;
             String nextPageUrl = "LocalHost";
             String previousPageUrl = "LocalHost";
-            response.setRspPagination(headResponse(currentPage, totalPageSize, ResponsePage.getTotalElements(), ResponsePage.getTotalPages(), ResponsePage.hasNext(), ResponsePage.hasPrevious(), nextPageUrl, previousPageUrl));
+            response.setRspPagination(headResponse(currentPage, content.size(), responsePage.getTotalElements(), responsePage.getTotalPages(), ResponsePage.hasNext(), ResponsePage.hasPrevious(), nextPageUrl, previousPageUrl));
             response.setRspData(content);
             return response;
 
@@ -91,7 +98,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
             currentPage = currentPage + 1;
             String nextPageUrl = "LocalHost";
             String previousPageUrl = "LocalHost";
-            response.setRspPagination(headResponse(currentPage, totalPageSize, ResponsePage.getTotalElements(), ResponsePage.getTotalPages(), ResponsePage.hasNext(), ResponsePage.hasPrevious(), nextPageUrl, previousPageUrl));
+            response.setRspPagination(headResponse(currentPage, content.size(), ResponsePage.getTotalElements(), ResponsePage.getTotalPages(), ResponsePage.hasNext(), ResponsePage.hasPrevious(), nextPageUrl, previousPageUrl));
             response.setRspData(content);
             return response;
 
@@ -331,13 +338,14 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
 
     private EntyRecpostcommentsmaDto mapToDto(EntyRecpostcommentsma entyRecpostcommentsma){
         EntyRecpostcommentsmaDto dto = new EntyRecpostcommentsmaDto();
+   
 
         dto.setRecIdeunikeyRcom(entyRecpostcommentsma.getRecIdeunikeyRcom());
         dto.setRecIdentifkeyRcom(entyRecpostcommentsma.getRecIdentifkeyRcom());
         dto.setRecProfiltypeRcom(entyRecpostcommentsma.getRecProfiltypeRcom());
         dto.setRecProfilpkeyRcom(entyRecpostcommentsma.getRecProfilpkeyRcom());
         dto.setRecProftypecmRcom(entyRecpostcommentsma.getRecProftypecmRcom());
-        dto.setRecIdentifkeyReus(entyRecpostcommentsma.getRecIdentifkeyReus());
+        dto.setRecIdentifkeyReus(entyRecpostcommentsma.getRecIdentifkeyReus());    
         dto.setApjIdentifkeyAphp(entyRecpostcommentsma.getApjIdentifkeyAphp());
         dto.setRecTreemlevelRcom(entyRecpostcommentsma.getRecTreemlevelRcom());
         dto.setRecTreemkeymsRcom(entyRecpostcommentsma.getRecTreemkeymsRcom());

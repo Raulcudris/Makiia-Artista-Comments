@@ -1,8 +1,14 @@
 package com.makiia.crosscutting.domain.model;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
-
 import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Builder
@@ -17,6 +23,7 @@ public class EntyRecpostcommentsmaDto {
     private String  recProfilpkeyRcom;
     private String  recProftypecmRcom;
     private String  recIdentifkeyReus;
+    private List<EntyUserCommentDto> rspDataUser;
     private String  apjIdentifkeyAphp;
     private String  recTreemlevelRcom;
     private String  recTreemkeymsRcom;
