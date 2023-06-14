@@ -15,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaDto;
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaResponse;
-import com.makiia.crosscutting.domain.model.EntyUserCommentDto;
 import com.makiia.crosscutting.domain.model.PaginationResponse;
 import com.makiia.crosscutting.exceptions.DataProvider;
 import com.makiia.crosscutting.exceptions.ExceptionBuilder;
@@ -42,19 +41,21 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
     public EntyRecpostcommentsmaResponse getAll() throws EBusinessException {
         try {
             List<EntyRecpostcommentsma> responsesComments = (List<EntyRecpostcommentsma>) repository.findAll();
-        
+   
+                
             int currentPage=0;
             int totalPageSize=responsesComments.size();
             Pageable pageable = PageRequest.of(currentPage, totalPageSize);
             //Pageable paginacion
             Page<EntyRecpostcommentsma> responsePage = null;
-            EntyUserCommentDto responseUserComment = null;
+          
             responsePage = repository.findAll(pageable);
-                
+      
+
             List<EntyRecpostcommentsma> ListPage = responsePage.getContent();            
             List<EntyRecpostcommentsmaDto> content  = ListPage.stream().map(p ->mapToDto(p)).collect(Collectors.toList());        
-            EntyRecpostcommentsmaResponse response = new EntyRecpostcommentsmaResponse();
-            
+           
+            EntyRecpostcommentsmaResponse response = new EntyRecpostcommentsmaResponse();           
       
             response.setRspMessage(response.getRspMessage());
             response.setRspValue(response.getRspValue());
@@ -62,7 +63,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
             currentPage = currentPage + 1;
             String nextPageUrl = "LocalHost";
             String previousPageUrl = "LocalHost";
-            response.setRspPagination(headResponse(currentPage, content.size(), responsePage.getTotalElements(), responsePage.getTotalPages(), ResponsePage.hasNext(), ResponsePage.hasPrevious(), nextPageUrl, previousPageUrl));
+            response.setRspPagination(headResponse(currentPage, content.size(), responsePage.getTotalElements(), responsePage.getTotalPages(), responsePage.hasNext(), responsePage.hasPrevious(), nextPageUrl, previousPageUrl));
             response.setRspData(content);
             return response;
 
@@ -337,15 +338,14 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
     }
 
     private EntyRecpostcommentsmaDto mapToDto(EntyRecpostcommentsma entyRecpostcommentsma){
-        EntyRecpostcommentsmaDto dto = new EntyRecpostcommentsmaDto();
-   
+        EntyRecpostcommentsmaDto dto = new EntyRecpostcommentsmaDto();   
 
         dto.setRecIdeunikeyRcom(entyRecpostcommentsma.getRecIdeunikeyRcom());
         dto.setRecIdentifkeyRcom(entyRecpostcommentsma.getRecIdentifkeyRcom());
         dto.setRecProfiltypeRcom(entyRecpostcommentsma.getRecProfiltypeRcom());
         dto.setRecProfilpkeyRcom(entyRecpostcommentsma.getRecProfilpkeyRcom());
         dto.setRecProftypecmRcom(entyRecpostcommentsma.getRecProftypecmRcom());
-        dto.setRecIdentifkeyReus(entyRecpostcommentsma.getRecIdentifkeyReus());    
+        dto.setRecIdentifkeyReus(entyRecpostcommentsma.getRecIdentifkeyReus());       
         dto.setApjIdentifkeyAphp(entyRecpostcommentsma.getApjIdentifkeyAphp());
         dto.setRecTreemlevelRcom(entyRecpostcommentsma.getRecTreemlevelRcom());
         dto.setRecTreemkeymsRcom(entyRecpostcommentsma.getRecTreemkeymsRcom());
@@ -370,6 +370,8 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
         dto.setRecRegisstateRcom(entyRecpostcommentsma.getRecRegisstateRcom());
         return  dto;
     }
+
+
 
     public static PaginationResponse headResponse(int currentPage    , int totalPageSize ,
                                                   long totalResults  , int totalPages,

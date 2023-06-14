@@ -1,5 +1,5 @@
 server:
-  port: 6070
+  port: 6073
   servlet:
     contextPath: /api
 
@@ -21,12 +21,13 @@ spring:
       jdbc-url: "jdbc:mysql://localhost/dbmysqlartistas"
       jmx-enabled: true
       password: root
-      username: admin
+      username: root
 
-  management:
+management:
     health:
       jms:
         enabled: true
-  mvc:
+mvc:
     pathmatch:
-      matching-strategy: ant_path_matcher
+      matching-strategy: ant-path-matcher
+

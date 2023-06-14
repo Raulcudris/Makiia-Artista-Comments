@@ -98,6 +98,10 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
                 dtox.setRecEditdetimeRcom(localTimeDefault);
                 dtox = this.ijpaDataProvider.update(dtox.getRecIdeunikeyRcom(),dtox);
             }
+            dto.setRspValue("OK");
+            dto.setRspMessage("OK");
+            dto.setRspParentKey("NA");
+            dto.setRspAppKey("NA");
             dto.setRspData(dtoAux);           
             return dto;
 
