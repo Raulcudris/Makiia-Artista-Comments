@@ -1,4 +1,4 @@
-package com.makiia.modules.bus.services;
+package com.makiia.modules.comments.services;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Builder
 public class TraceabilityService {
+/*
     @Builder.Default
     private static final String SENDER_NIT = "SENDER_NIT";
     @Builder.Default
@@ -34,10 +35,12 @@ public class TraceabilityService {
     private static final String DOCUMENT_TYPE = "DOCUMENT_TYPE";
     @Builder.Default
     private static final String TRANSACTION_ID = "transactionId";
+
+*/   
     @Builder.Default
-    private static final String COMPONENT = "ApprovalServices";
+    private static final String COMPONENT = "CommentsService";
     @Builder.Default
-    private static final String SERVICE = "RADIAN";
+    private static final String SERVICE = "COMMENTS";
     @Builder.Default
     private static final Locale LOCALE = new Locale("es", "CO");
 

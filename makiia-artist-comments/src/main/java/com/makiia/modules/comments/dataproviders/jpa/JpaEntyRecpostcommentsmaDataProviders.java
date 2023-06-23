@@ -78,15 +78,17 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
 
 
     @Override
-    public EntyRecpostcommentsmaResponse getAll(int currentPage , int totalPageSize , int parameter, String filter) throws EBusinessException {
+    public EntyRecpostcommentsmaResponse getAll(int currentPage , int totalPageSize , String parameter, String filter) throws EBusinessException {
         try {
             currentPage = currentPage - 1;
             Pageable pageable = PageRequest.of(currentPage, totalPageSize);
             Page<EntyRecpostcommentsma> ResponsePage = null;
-            if (parameter == 0) {
-                ResponsePage = repository.findByRecIdentifkeyRcom(filter, pageable);
+            
+            if (parameter.equals("FKEY")) {
+                ResponsePage = repository.findByRecProfilpkeyRcom(filter, pageable);
             }else {
-                ResponsePage = repository.findByRecIdeunikeyRcom(parameter,pageable);
+                // PKEY
+                ResponsePage = repository.findByRecIdeunikeyRcom(Integer.parseInt(filter),pageable);
             }
 
             List<EntyRecpostcommentsma> ListPage = ResponsePage.getContent();
@@ -192,7 +194,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                     Objects.nonNull(dto.getRecProftypecmRcom())&& !entity.getRecProftypecmRcom().isEmpty()
                             ? entity.getRecProftypecmRcom()
                             :old.getRecProftypecmRcom());
-
+/* 
             old.setRecIdentifkeyReus(
                     Objects.nonNull(dto.getRecIdentifkeyReus())&& !entity.getRecIdentifkeyReus().isEmpty()
                             ? entity.getRecIdentifkeyReus()
@@ -202,7 +204,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                     Objects.nonNull(dto.getRecIdentifkeyReus())&& !entity.getRecIdentifkeyReus().isEmpty()
                             ? entity.getRecIdentifkeyReus()
                             :old.getRecIdentifkeyReus());
-
+*/
             old.setApjIdentifkeyAphp(
                     Objects.nonNull(dto.getApjIdentifkeyAphp())&& !entity.getApjIdentifkeyAphp().isEmpty()
                     ? entity.getApjIdentifkeyAphp()
@@ -338,14 +340,13 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
     }
 
     private EntyRecpostcommentsmaDto mapToDto(EntyRecpostcommentsma entyRecpostcommentsma){
-        EntyRecpostcommentsmaDto dto = new EntyRecpostcommentsmaDto();   
-
+        EntyRecpostcommentsmaDto dto = new EntyRecpostcommentsmaDto(); 
         dto.setRecIdeunikeyRcom(entyRecpostcommentsma.getRecIdeunikeyRcom());
         dto.setRecIdentifkeyRcom(entyRecpostcommentsma.getRecIdentifkeyRcom());
         dto.setRecProfiltypeRcom(entyRecpostcommentsma.getRecProfiltypeRcom());
         dto.setRecProfilpkeyRcom(entyRecpostcommentsma.getRecProfilpkeyRcom());
         dto.setRecProftypecmRcom(entyRecpostcommentsma.getRecProftypecmRcom());
-        dto.setRecIdentifkeyReus(entyRecpostcommentsma.getRecIdentifkeyReus());       
+        //dto.setRecIdentifkeyReus(entyRecpostcommentsma.getRecIdentifkeyReus());
         dto.setApjIdentifkeyAphp(entyRecpostcommentsma.getApjIdentifkeyAphp());
         dto.setRecTreemlevelRcom(entyRecpostcommentsma.getRecTreemlevelRcom());
         dto.setRecTreemkeymsRcom(entyRecpostcommentsma.getRecTreemkeymsRcom());
@@ -367,9 +368,11 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
         dto.setRecCheckmdateRcom(entyRecpostcommentsma.getRecCheckmdateRcom());
         dto.setRecCheckmtimeRcom(entyRecpostcommentsma.getRecCheckmtimeRcom());
         dto.setRecOrdviewkeyRcom(entyRecpostcommentsma.getRecOrdviewkeyRcom());
-        dto.setRecRegisstateRcom(entyRecpostcommentsma.getRecRegisstateRcom());
+        dto.setRecIspriorityRcom(entyRecpostcommentsma.getRecIspriorityRcom());
+        dto.setRecRegisstateRcom(entyRecpostcommentsma.getRecRegisstateRcom()); 
         return  dto;
     }
+
 
 
 

@@ -5,9 +5,12 @@ import java.time.LocalDate;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -48,10 +51,10 @@ public class EntyRecpostcommentsma implements Serializable {
     @Column(name = "rec_proftypecm_rcom")
     private String  recProftypecmRcom;
 
-    @Basic(optional = false)
-    @Column(name = "rec_identifkey_reus")
-    private String  recIdentifkeyReus;
-
+    //@Basic(optional = false)
+    //@Column(name = "rec_identifkey_reus")
+    //private String  recIdentifkeyReus;
+    
     @Basic(optional = false)
     @Column(name = "apj_identifkey_aphp")
     private String  apjIdentifkeyAphp;
@@ -141,7 +144,16 @@ public class EntyRecpostcommentsma implements Serializable {
     private Long  recOrdviewkeyRcom;
 
     @Basic(optional = false)
+    @Column(name = "rec_ispriority_rcom")
+    private Integer  recIspriorityRcom;    
+
+    @Basic(optional = false)
     @Column(name = "rec_regisstate_rcom")
     private String  recRegisstateRcom;
-
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rec_identifkey_reus")
+    private EntyRecmaesusuarima entyRecmaesusuarimaDto;
+    
 }
+ 

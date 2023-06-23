@@ -5,12 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntyUserCommentDto {
-    private String imgUser;
-    private String nomUsuer;
+public class EntyRecmaesusuarimaDto {
+    private String recNroregReus;
+    private String recNiknamReus;
+    private String recNomusuReus;
+    private String recImgvisReus;
 }

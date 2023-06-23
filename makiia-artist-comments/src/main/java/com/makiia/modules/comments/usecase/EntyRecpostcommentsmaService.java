@@ -17,9 +17,9 @@ import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaResponse;
 import com.makiia.crosscutting.exceptions.ExceptionBuilder;
 import com.makiia.crosscutting.exceptions.Main.EBusinessException;
 import com.makiia.crosscutting.messages.SearchMessages;
-import com.makiia.modules.bus.services.UseCase;
-import com.makiia.modules.bus.services.UsecaseServices;
 import com.makiia.modules.comments.dataproviders.jpa.JpaEntyRecpostcommentsmaDataProviders;
+import com.makiia.modules.comments.services.UseCase;
+import com.makiia.modules.comments.services.UsecaseServices;
 
 @UseCase
 public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcommentsmaDto, JpaEntyRecpostcommentsmaDataProviders>

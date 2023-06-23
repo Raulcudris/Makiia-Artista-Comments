@@ -10,7 +10,7 @@ logging:
 spring:
   jpa:
     properties:
-      hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate.jdbc.lob.non-contextual-creation: true
 
   datasource:
     db-ebusiness:
@@ -21,7 +21,7 @@ spring:
       jdbc-url: "jdbc:mysql://localhost/dbmysqlartistas"
       jmx-enabled: true
       password: root
-      username: root
+      username: admin
 
 management:
     health:
