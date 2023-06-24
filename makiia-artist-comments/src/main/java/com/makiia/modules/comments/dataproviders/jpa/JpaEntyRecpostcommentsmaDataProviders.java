@@ -41,18 +41,18 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
     public EntyRecpostcommentsmaResponse getAll() throws EBusinessException {
         try {
             List<EntyRecpostcommentsma> responsesComments = (List<EntyRecpostcommentsma>) repository.findAll();
-   
+           
                 
             int currentPage=0;
             int totalPageSize=responsesComments.size();
             Pageable pageable = PageRequest.of(currentPage, totalPageSize);
             //Pageable paginacion
             Page<EntyRecpostcommentsma> responsePage = null;
-          
+        
             responsePage = repository.findAll(pageable);
       
 
-            List<EntyRecpostcommentsma> ListPage = responsePage.getContent();            
+            List<EntyRecpostcommentsma> ListPage = responsePage.getContent();  
             List<EntyRecpostcommentsmaDto> content  = ListPage.stream().map(p ->mapToDto(p)).collect(Collectors.toList());        
            
             EntyRecpostcommentsmaResponse response = new EntyRecpostcommentsmaResponse();           
@@ -194,17 +194,13 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                     Objects.nonNull(dto.getRecProftypecmRcom())&& !entity.getRecProftypecmRcom().isEmpty()
                             ? entity.getRecProftypecmRcom()
                             :old.getRecProftypecmRcom());
-/* 
-            old.setRecIdentifkeyReus(
-                    Objects.nonNull(dto.getRecIdentifkeyReus())&& !entity.getRecIdentifkeyReus().isEmpty()
-                            ? entity.getRecIdentifkeyReus()
-                            :old.getRecIdentifkeyReus());
 
-            old.setRecIdentifkeyReus(
+           /*  old.setRecIdentifkeyReus(
                     Objects.nonNull(dto.getRecIdentifkeyReus())&& !entity.getRecIdentifkeyReus().isEmpty()
                             ? entity.getRecIdentifkeyReus()
                             :old.getRecIdentifkeyReus());
-*/
+            */
+
             old.setApjIdentifkeyAphp(
                     Objects.nonNull(dto.getApjIdentifkeyAphp())&& !entity.getApjIdentifkeyAphp().isEmpty()
                     ? entity.getApjIdentifkeyAphp()

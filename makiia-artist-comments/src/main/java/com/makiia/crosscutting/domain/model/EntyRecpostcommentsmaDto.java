@@ -1,19 +1,21 @@
 package com.makiia.crosscutting.domain.model;
 import java.time.LocalDate;
 
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
-@Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class EntyRecpostcommentsmaDto {
 
     private Integer recIdeunikeyRcom;
@@ -21,6 +23,7 @@ public class EntyRecpostcommentsmaDto {
     private String  recProfiltypeRcom;
     private String  recProfilpkeyRcom;
     private String  recProftypecmRcom;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String  recIdentifkeyReus;   
     private String  apjIdentifkeyAphp;
     private String  recTreemlevelRcom;
@@ -49,5 +52,6 @@ public class EntyRecpostcommentsmaDto {
     private Long  recOrdviewkeyRcom;
     private Integer  recIspriorityRcom;
     private String  recRegisstateRcom;
+    @ManyToOne(fetch = FetchType.LAZY)
     private EntyRecmaesusuarimaDto regUsers;
 }

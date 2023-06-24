@@ -18,20 +18,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
-@Entity
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
 @Table(name = "recmaesusuarima")
 public class EntyRecmaesusuarima  implements Serializable {
     
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rec_nroreg_reus")
-    private String  recNroregReus;
+    @Column(name = "rec_identifkey_reus")
+    private String  recIdentifkeyReus;
 
     @Basic(optional = false)
     @Column(name = "rec_niknam_reus")

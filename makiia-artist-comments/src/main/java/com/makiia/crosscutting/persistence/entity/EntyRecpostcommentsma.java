@@ -20,15 +20,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
-@Entity
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
 @Table(name = "recpostcommentsma")
 public class EntyRecpostcommentsma implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -50,10 +51,10 @@ public class EntyRecpostcommentsma implements Serializable {
     @Basic(optional = false)
     @Column(name = "rec_proftypecm_rcom")
     private String  recProftypecmRcom;
-
-    //@Basic(optional = false)
-    //@Column(name = "rec_identifkey_reus")
-    //private String  recIdentifkeyReus;
+    
+    @Basic(optional = false)
+    @Column(name = "rec_identifkey_reus")
+    private String  recIdentifkeyReus;
     
     @Basic(optional = false)
     @Column(name = "apj_identifkey_aphp")
@@ -152,8 +153,8 @@ public class EntyRecpostcommentsma implements Serializable {
     private String  recRegisstateRcom;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rec_identifkey_reus")
-    private EntyRecmaesusuarima entyRecmaesusuarimaDto;
+    @JoinColumn(name = "rec_identifkey_reus",insertable = false, updatable = false)
+    private EntyRecmaesusuarima regUsers;
     
 }
  
