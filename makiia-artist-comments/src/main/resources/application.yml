@@ -10,7 +10,7 @@ logging:
 spring:
   jpa:
     properties:
-      hibernate.jdbc.lob.non-contextual-creation: true
+      hibernate.jdbc.lob.non_contextual_creation: true
 
   datasource:
     db-ebusiness:
