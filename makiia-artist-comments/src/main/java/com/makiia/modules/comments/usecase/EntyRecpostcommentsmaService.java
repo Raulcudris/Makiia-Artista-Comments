@@ -53,6 +53,7 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
             ordeView = Long.valueOf(dateNowWhitTime);
             year = Integer.parseInt(localYear);
             for(EntyRecpostcommentsmaDto dtox : dtoAux){
+            if(dtox.getRecIdentifkeyRcom().equals("NA")){
                 dtox.setRecIdentifkeyRcom(year+""+dtox.getRecIdeunikeyRcom());
                 dtox.setRecMessagdateRcom(localDateNow);
                 dtox.setRecMessagtimeRcom(localTimeNow );
@@ -64,8 +65,11 @@ public class EntyRecpostcommentsmaService extends UsecaseServices<EntyRecpostcom
                 dtox.setRecCheckmdateRcom(localDateNow);
                 dtox.setRecCheckmtimeRcom(localTimeNow);
                 dtox.setRecRegisstateRcom("1");
-                dtox.setRecOrdviewkeyRcom(ordeView);
-            }
+                dtox.setRecOrdviewkeyRcom(ordeView);             
+                }
+                
+        } 
+            
             dtoAux = this.ijpaDataProvider.save(dtoAux);
             dto.setRspData(dtoAux);
             dto.setRspValue("OK");

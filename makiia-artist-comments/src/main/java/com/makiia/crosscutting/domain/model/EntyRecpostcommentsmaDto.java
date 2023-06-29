@@ -50,6 +50,7 @@ public class EntyRecpostcommentsmaDto {
     private LocalDate  recCheckmdateRcom;
     private Double  recCheckmtimeRcom;
     private Long  recOrdviewkeyRcom;
+    private Integer  recIspriorityRcom;    
     private String  recRegisstateRcom;
     @ManyToOne(fetch = FetchType.LAZY)
     private EntyRecmaesusuarimaDto regUsers;

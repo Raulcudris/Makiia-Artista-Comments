@@ -69,7 +69,7 @@ public class UsecaseServices <T, K> {
      * @throws EBusinessException  excepcion
      * @throws MicroEventException excepcion
      */
-    public EntyRecpostcommentsmaResponse getAll(int currentPage , int pageSize, int parameter , String filter) throws EBusinessException, MicroEventException {
+    public EntyRecpostcommentsmaResponse getAll(int currentPage , int pageSize, String parameter , String filter) throws EBusinessException, MicroEventException {
         String transactionalId = UUID.randomUUID().toString();
 
         try {
@@ -91,8 +91,7 @@ public class UsecaseServices <T, K> {
                     .buildBusinessException();
         }
     }
-
-
+    
     /**
      * genera el map que se insertará en la trazabilidad
      *

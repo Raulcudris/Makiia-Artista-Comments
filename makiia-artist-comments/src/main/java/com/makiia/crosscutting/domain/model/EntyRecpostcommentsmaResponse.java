@@ -22,6 +22,5 @@ public class EntyRecpostcommentsmaResponse {
     @Builder.Default
     private  PaginationResponse rspPagination = new PaginationResponse();
     private  List<EntyRecpostcommentsmaDto> rspData;
-
 }
 
