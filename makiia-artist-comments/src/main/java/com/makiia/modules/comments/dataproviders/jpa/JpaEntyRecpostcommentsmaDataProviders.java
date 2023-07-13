@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import com.makiia.crosscutting.domain.model.EntyRecmaesusuarimaDto;
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaDto;
 import com.makiia.crosscutting.domain.model.EntyRecpostcommentsmaResponse;
 import com.makiia.crosscutting.domain.model.PaginationResponse;
@@ -21,7 +22,9 @@ import com.makiia.crosscutting.exceptions.ExceptionBuilder;
 import com.makiia.crosscutting.exceptions.Main.EBusinessException;
 import com.makiia.crosscutting.messages.SearchMessages;
 import com.makiia.crosscutting.patterns.Translator;
+import com.makiia.crosscutting.persistence.entity.EntyRecmaesusuarima;
 import com.makiia.crosscutting.persistence.entity.EntyRecpostcommentsma;
+import com.makiia.crosscutting.persistence.repository.EntyRecmaesusuarimaRepository;
 import com.makiia.crosscutting.persistence.repository.EntyRecpostcommentsmaRepository;
 import com.makiia.modules.comments.dataproviders.IjpaEntyRecpostcommentsmaDataProviders;
 
@@ -29,10 +32,13 @@ import com.makiia.modules.comments.dataproviders.IjpaEntyRecpostcommentsmaDataPr
 public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcommentsmaDataProviders {
 
     @Autowired
+    private EntyRecmaesusuarimaRepository users;
+
+    @Autowired
     private EntyRecpostcommentsmaRepository repository;
     @Autowired
-    @Qualifier("entyRecpostcommentsmaSaveResponseTranslate")
-    private Translator<EntyRecpostcommentsma, EntyRecpostcommentsmaDto>saveResponseTranslate;
+    @Qualifier("entyRecpostcommentsmaEntityToDtoTranslate")
+    private Translator<EntyRecpostcommentsma, EntyRecpostcommentsmaDto>entityToDtoTranslate; // entityToDtoTranslate
     @Autowired
     @Qualifier("entyRecpostcommentsmaDtoToEntityTranslate")
     private Translator<EntyRecpostcommentsmaDto, EntyRecpostcommentsma>dtoToEntityTranslate;
@@ -117,7 +123,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
     @Override
     public EntyRecpostcommentsmaDto get(Integer id) throws EBusinessException {
         try {
-            return saveResponseTranslate.translate(repository.findById(id).get());
+            return entityToDtoTranslate.translate(repository.findById(id).get());
         } catch (PersistenceException | DataAccessException e) {
             throw ExceptionBuilder.builder()
                     .withMessage(SearchMessages.SEARCH_ERROR_DESCRIPTION)
@@ -130,7 +136,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
     @Override
     public EntyRecpostcommentsmaDto save(EntyRecpostcommentsmaDto dto) throws EBusinessException {
         try {
-            return saveResponseTranslate.translate(repository.save(dtoToEntityTranslate.translate(dto)));
+            return entityToDtoTranslate.translate(repository.save(dtoToEntityTranslate.translate(dto)));
         } catch (PersistenceException | DataAccessException e) {
             throw ExceptionBuilder.builder()
                     .withMessage(SearchMessages.CREATE_ERROR_DESCRIPTION)
@@ -151,7 +157,9 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
             }
             dtos = new ArrayList<>();
             for (EntyRecpostcommentsma entity : repository.saveAll(entities)) {
-                dtos.add(saveResponseTranslate.translate(entity));
+                //dtos.add(entityToDtoTranslate.translate(entity));
+                //Thread.sleep(5000);
+                dtos.add(entityToDtoTranslate.translate(repository.findById(entity.getRecIdeunikeyRcom()).get()));
             }
             return dtos;
         } catch (PersistenceException | DataAccessException e) {
@@ -195,10 +203,10 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                             ? entity.getRecProftypecmRcom()
                             :old.getRecProftypecmRcom());
 
-            old.setRecIdentifkeyReus(
-                    Objects.nonNull(dto.getRecIdentifkeyReus())&& !entity.getRecIdentifkeyReus().isEmpty()
-                            ? entity.getRecIdentifkeyReus()
-                            :old.getRecIdentifkeyReus());
+            old.setRecIdeunikeyReus(
+                    Objects.nonNull(dto.getRecIdeunikeyReus())&& !entity.getRecIdeunikeyReus().equals(0)
+                            ? entity.getRecIdeunikeyReus()
+                            :old.getRecIdeunikeyReus());
           
 
             old.setApjIdentifkeyAphp(
@@ -311,7 +319,27 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
                             ? entity.getRecRegisstateRcom()
                             :old.getRecRegisstateRcom());
 
-            return saveResponseTranslate.translate(repository.save(old));
+            //return entityToDtoTranslate.translate(repository.save(old));
+            
+            EntyRecpostcommentsma ob = repository.save(old);
+            EntyRecmaesusuarima us = users.findById(old.getRecIdeunikeyReus()).get();
+
+             ob.setRegUsers(EntyRecmaesusuarima.builder()
+                .recIdeunikeyReus(us.getRecIdeunikeyReus()) 
+                .recNroregReus(us.getRecNroregReus()) 
+                .recNiknamReus(us.getRecNiknamReus())
+                .recNomusuReus(us.getRecNomusuReus())
+                .recImgvisReus(us.getRecImgvisReus()).build());
+
+
+
+            //ob = repository.findById((ob).getRecIdeunikeyRcom()).get();
+
+            return entityToDtoTranslate.translate(ob);
+            //return entityToDtoTranslate.translate(repository.findById((ob).getRecIdeunikeyRcom()).get());
+
+            //    dtos.add(entityToDtoTranslate.translate(repository.findById(entity.getRecIdeunikeyRcom()).get()));
+
         } catch (PersistenceException | DataAccessException e) {
             throw ExceptionBuilder.builder()
                     .withMessage(SearchMessages.UPDATE_ERROR_DESCRIPTION)
@@ -342,7 +370,7 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
         dto.setRecProfiltypeRcom(entyRecpostcommentsma.getRecProfiltypeRcom());
         dto.setRecProfilpkeyRcom(entyRecpostcommentsma.getRecProfilpkeyRcom());
         dto.setRecProftypecmRcom(entyRecpostcommentsma.getRecProftypecmRcom());
-        dto.setRecIdentifkeyReus(entyRecpostcommentsma.getRecIdentifkeyReus());
+        dto.setRecIdeunikeyReus(entyRecpostcommentsma.getRecIdeunikeyReus());
         dto.setApjIdentifkeyAphp(entyRecpostcommentsma.getApjIdentifkeyAphp());
         dto.setRecTreemlevelRcom(entyRecpostcommentsma.getRecTreemlevelRcom());
         dto.setRecTreemkeymsRcom(entyRecpostcommentsma.getRecTreemkeymsRcom());
@@ -366,6 +394,13 @@ public class JpaEntyRecpostcommentsmaDataProviders implements IjpaEntyRecpostcom
         dto.setRecOrdviewkeyRcom(entyRecpostcommentsma.getRecOrdviewkeyRcom());
         dto.setRecIspriorityRcom(entyRecpostcommentsma.getRecIspriorityRcom());
         dto.setRecRegisstateRcom(entyRecpostcommentsma.getRecRegisstateRcom()); 
+        dto.setRegUsers(new EntyRecmaesusuarimaDto(
+                entyRecpostcommentsma.getRegUsers().getRecIdeunikeyReus(), 
+                entyRecpostcommentsma.getRegUsers().getRecNroregReus(), 
+                entyRecpostcommentsma.getRegUsers().getRecNiknamReus(), 
+                entyRecpostcommentsma.getRegUsers().getRecNomusuReus(), 
+                entyRecpostcommentsma.getRegUsers().getRecImgvisReus()));
+
         return  dto;
     }
 

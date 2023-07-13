@@ -53,8 +53,8 @@ public class EntyRecpostcommentsma implements Serializable {
     private String  recProftypecmRcom;
     
     @Basic(optional = false)
-    @Column(name = "rec_identifkey_reus")
-    private String  recIdentifkeyReus;
+    @Column(name = "rec_ideunikey_reus")
+    private Integer  recIdeunikeyReus;
     
     @Basic(optional = false)
     @Column(name = "apj_identifkey_aphp")
@@ -153,7 +153,7 @@ public class EntyRecpostcommentsma implements Serializable {
     private String  recRegisstateRcom;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rec_identifkey_reus",insertable = false, updatable = false)
+    @JoinColumn(name = "rec_ideunikey_reus",insertable = false, updatable = false)
     private EntyRecmaesusuarima regUsers;
     
 }

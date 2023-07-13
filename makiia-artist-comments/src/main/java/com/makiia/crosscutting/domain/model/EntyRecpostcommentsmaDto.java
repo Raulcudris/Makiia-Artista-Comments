@@ -19,12 +19,12 @@ import lombok.ToString;
 @AllArgsConstructor
 public class EntyRecpostcommentsmaDto {
 
-    private Integer  recIdeunikeyRcom;
-    private String   recIdentifkeyRcom;
+    private Integer recIdeunikeyRcom;
+    private String  recIdentifkeyRcom;
     private String  recProfiltypeRcom;
     private String  recProfilpkeyRcom;
     private String  recProftypecmRcom;
-    private String  recIdentifkeyReus;
+    private Integer recIdeunikeyReus;
     private String  apjIdentifkeyAphp;
     private String  recTreemlevelRcom;
     private String  recTreemkeymsRcom;

@@ -30,8 +30,12 @@ public class EntyRecmaesusuarima  implements Serializable {
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rec_identifkey_reus")
-    private String  recIdentifkeyReus;
+    @Column(name = "rec_ideunikey_reus")
+    private Integer  recIdeunikeyReus;
+
+    @Basic(optional = false)
+    @Column(name = "rec_nroreg_reus")
+    private String recNroregReus;
 
     @Basic(optional = false)
     @Column(name = "rec_niknam_reus")

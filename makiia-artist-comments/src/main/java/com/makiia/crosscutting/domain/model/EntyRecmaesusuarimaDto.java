@@ -5,14 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class EntyRecmaesusuarimaDto {
-   private String recIdentifkeyReus;
-    private String recNiknamReus;
-    private String recNomusuReus;
-    private String recImgvisReus;
+    private Integer recIdeunikeyReus;
+    private String  recNroregReus;
+    private String  recNiknamReus;
+    private String  recNomusuReus;
+    private String  recImgvisReus;
 }
